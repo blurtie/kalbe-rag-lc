@@ -207,7 +207,7 @@ Dense results are unaffected (same 9/12). Same 12 questions, so this is indicati
 ## 9. What I would investigate next
 
 1. **Cross-paper retrieval**, the main measured failure: query decomposition (one sub-query per
-   paper) or multi-query + RRF (*RAG From Scratch*, parts 5–9), or a cap on chunks per paper in the
+   paper) or multi-query + RRF, or a cap on chunks per paper in the
    top-k. Re-measure with the same questions, plus more cross-paper questions.
 2. **Text cleaning before embedding** (headers/footers, hyphenation) to test whether it explains
    the dense gap to the baseline.
