@@ -1,0 +1,34 @@
+# All tunable settings live here, not in the code.
+# Machine-specific values (OLLAMA_HOST) go in .env — see .env.example.
+
+manifest: papers.yaml
+
+paths:
+  raw_dir: data/raw                  # PDFs from scripts/download_papers.py
+  chroma_dir: data/chroma            # LangChain Chroma vector store (persisted)
+  chunks_file: data/chunks.jsonl     # same chunks as text, needed to build BM25 at query time
+  outputs_dir: outputs
+
+chunking:                            # RecursiveCharacterTextSplitter, measured in bge-m3 tokens
+  chunk_size: 400
+  chunk_overlap: 80
+  index_kinds: [main, appendix]      # pages labelled "references" are dropped
+
+embedding:
+  model: BAAI/bge-m3
+  device: cuda                       # "cpu" if VRAM is tight
+
+retrieval:
+  method: hybrid                     # dense | bm25 | hybrid
+  top_k: 5                           # chunks given to the LLM
+  candidate_k: 20                    # each retriever's list length before hybrid fusion
+  hybrid_weights: [0.5, 0.5]         # [bm25, dense] weights in EnsembleRetriever (weighted RRF, c=60)
+  # BM25 tokenization: "whitespace" = LangChain default (text.split(): case-sensitive, punctuation
+  # stays attached, so "embodiments," != "embodiments"); "words_lowercase" = lowercase \w+ tokens.
+  bm25_tokenizer: words_lowercase
+
+generation:
+  model: qwen3:8b                    # Ollama tag; record the exact ID from `ollama list`
+  temperature: 0.0
+  num_ctx: 8192
+  reasoning: false                   # turn off Qwen3 "thinking" output

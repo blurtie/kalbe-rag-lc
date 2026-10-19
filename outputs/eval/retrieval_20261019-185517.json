@@ -1,0 +1,39 @@
+{
+  "n_questions": 12,
+  "config": {
+    "method": "hybrid",
+    "top_k": 5,
+    "candidate_k": 20,
+    "hybrid_weights": [
+      0.5,
+      0.5
+    ],
+    "bm25_tokenizer": "words_lowercase"
+  },
+  "summary": {
+    "dense": {
+      "hit@1": 0.667,
+      "hit@3": 0.75,
+      "hit@5": 0.75,
+      "rr": 0.745,
+      "all_gold_docs@5": 0.667,
+      "offdoc_appendix@5": 0.0
+    },
+    "bm25": {
+      "hit@1": 0.667,
+      "hit@3": 0.917,
+      "hit@5": 0.917,
+      "rr": 0.764,
+      "all_gold_docs@5": 0.833,
+      "offdoc_appendix@5": 0.0
+    },
+    "hybrid": {
+      "hit@1": 0.667,
+      "hit@3": 0.75,
+      "hit@5": 1.0,
+      "rr": 0.762,
+      "all_gold_docs@5": 0.833,
+      "offdoc_appendix@5": 0.0
+    }
+  }
+}

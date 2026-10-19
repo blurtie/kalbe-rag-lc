@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Data: PDFs are downloaded by script, index is rebuilt by `ingest`
+data/raw/
+data/chroma/
+data/chunks.jsonl
+
+# Secrets
+.env

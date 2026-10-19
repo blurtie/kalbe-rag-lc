@@ -1,0 +1,67 @@
+# Document collection: the 10 papers from the Kalbe technical-assessment reading list.
+# PDFs are NOT committed (licenses differ per paper); run scripts/download_papers.py.
+# P7 uses the arXiv preprint (40 pages), not the Nature version.
+#
+# references_start_page / appendix_start_page: checked manually by opening each PDF.
+# Pages labelled "references" are dropped before indexing (a bibliography matches many
+# queries by keyword but never contains an answer).
+
+papers:
+  - id: P1
+    title: "Eyes Wide Shut? Exploring the Visual Shortcomings of Multimodal LLMs"
+    venue: "CVPR 2024"
+    url: "https://arxiv.org/pdf/2401.06209"
+    references_start_page: 9
+    appendix_start_page: 12
+  - id: P2
+    title: "What Makes for Good Visual Instructions? Synthesizing Complex Visual Reasoning Instructions for Visual Instruction Tuning"
+    venue: "COLING 2025"
+    url: "https://aclanthology.org/2025.coling-main.546.pdf"
+    references_start_page: 9
+    appendix_start_page: 12
+  - id: P3
+    title: "Do Vision-Language Models Really Understand Visual Language?"
+    venue: "ICML 2025"
+    url: "https://raw.githubusercontent.com/mlresearch/v267/main/assets/hou25c/hou25c.pdf"
+    references_start_page: 10
+    appendix_start_page: 15
+  - id: P4
+    title: "MMMU-Pro: A More Robust Multi-discipline Multimodal Understanding Benchmark"
+    venue: "ACL 2025"
+    url: "https://aclanthology.org/2025.acl-long.736.pdf"
+    references_start_page: 10
+    appendix_start_page: 14
+  - id: P5
+    title: "HallusionBench: An Advanced Diagnostic Suite for Entangled Language Hallucination and Visual Illusion in Large Vision-Language Models"
+    venue: "CVPR 2024"
+    url: "https://arxiv.org/pdf/2310.14566"
+    references_start_page: 43
+    appendix_start_page: 9     # appendix comes BEFORE the references in this PDF
+  - id: P6
+    title: "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control"
+    venue: "CoRL 2023"
+    url: "https://proceedings.mlr.press/v229/zitkovich23a/zitkovich23a.pdf"
+    references_start_page: 9
+    appendix_start_page: 14
+  - id: P7
+    title: "Mastering Diverse Domains through World Models (DreamerV3, arXiv preprint)"
+    venue: "arXiv preprint; published in Nature 2025"
+    url: "https://arxiv.org/pdf/2301.04104"
+    references_start_page: 12
+    appendix_start_page: 17
+  - id: P8
+    title: "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion"
+    venue: "RSS 2023"
+    url: "https://arxiv.org/pdf/2303.04137"
+    references_start_page: 13
+    appendix_start_page: 16
+  - id: P9
+    title: "Open X-Embodiment: Robotic Learning Datasets and RT-X Models"
+    venue: "ICRA 2024"
+    url: "https://arxiv.org/pdf/2310.08864"
+    references_start_page: 7
+  - id: P10
+    title: "Learning to Walk in Minutes Using Massively Parallel Deep Reinforcement Learning"
+    venue: "CoRL 2022"
+    url: "https://proceedings.mlr.press/v164/rudin22a/rudin22a.pdf"
+    references_start_page: 9

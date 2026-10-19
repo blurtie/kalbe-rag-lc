@@ -1,0 +1,20 @@
+# Python 3.11. torch is the CUDA 12.6 build from the PyTorch index below.
+# Reviewers without an NVIDIA GPU: this build also runs on CPU (slower embedding).
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch==2.14.1+cu126
+# LangChain 1.x split: core + community + partner packages (+ langchain-classic for EnsembleRetriever)
+langchain-core==1.6.12
+langchain-community==0.4.2
+langchain-classic==1.0.8
+langchain-text-splitters==1.1.3
+langchain-chroma==1.1.0
+langchain-huggingface==1.2.3
+langchain-ollama==1.1.0
+chromadb==1.5.9
+sentence-transformers==6.1.0
+transformers==5.20.1
+pymupdf==1.28.2
+rank-bm25==0.2.2
+numpy==2.4.6
+PyYAML==6.0.3
+requests==2.34.2

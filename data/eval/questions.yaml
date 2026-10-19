@@ -1,0 +1,151 @@
+# Evaluation set: 14 questions (12 answerable + 2 unanswerable).
+#
+# How this file was made (keep this honest; it goes into the README AI-assistance note):
+#   - Candidate questions and gold pages were DRAFTED by Claude by searching the PDF text
+#     (NOT by using this RAG system's retriever, so the set is not biased toward it).
+#   - Each `evidence` line quotes the sentence the answer comes from.
+#   - I (Faiqi) verified every gold page by opening the PDF: [TODO - tick each one below]
+#
+# gold.pages = page numbers as shown by the PDF viewer (1-based), not printed page numbers.
+# P7 is intentionally not used: my local P7 is the 40-page arXiv version; page numbers
+# would not match the Nature version.
+#
+# Language mix: 7 Indonesian (technical terms kept in English), 7 English.
+# BM25 cannot match Indonesian words to English text, so results are reported per language too.
+
+questions:
+  - id: q01
+    type: single
+    lang: id
+    question: "Apa yang dimaksud dengan CLIP-blind pairs di paper Eyes Wide Shut?"
+    gold:
+      - {doc: P1, pages: [1, 2]}
+    answer: "Pasangan gambar yang dianggap mirip oleh CLIP (embedding CLIP mirip) padahal jelas berbeda secara visual (embedding DINOv2 berbeda)."
+    evidence: "p2: 'CLIP-blind pairs are images with similar CLIP embeddings but different DINOv2 embeddings.'"
+    verified: true
+
+  - id: q02
+    type: single
+    lang: id
+    question: "Berapa banyak visual pattern yang dicakup oleh benchmark MMVP?"
+    gold:
+      - {doc: P1, pages: [1, 5]}
+    answer: "Sembilan visual pattern dasar."
+    evidence: "p1: 'struggle with straightforward questions across nine basic visual patterns'"
+    verified: true
+
+  - id: q03
+    type: single
+    lang: id
+    question: "Berapa lama waktu training policy berjalan untuk robot ANYmal di flat terrain dan di uneven terrain?"
+    gold:
+      - {doc: P10, pages: [1]}
+    answer: "Kurang dari 4 menit untuk flat terrain, 20 menit untuk uneven terrain."
+    evidence: "p1: 'training policies for flat terrain in under four minutes, and in twenty minutes for uneven terrain'"
+    verified: true
+
+  - id: q04
+    type: single
+    lang: en
+    question: "Which simulation environment is used to train thousands of robots in parallel on a single GPU?"
+    gold:
+      - {doc: P10, pages: [2, 3]}
+    answer: "NVIDIA Isaac Gym, which runs both simulation and training on the GPU."
+    evidence: "p2: 'we use NVIDIA's Isaac Gym simulation environment, which runs both the simulation and training on the GPU'"
+    verified: true
+
+  - id: q05
+    type: single
+    lang: en
+    question: "How does RT-2 represent robot actions so that a vision-language model can output them?"
+    gold:
+      - {doc: P6, pages: [1, 2, 3]}
+    answer: "Actions are expressed as text tokens and trained like natural-language tokens (discretized, following RT-1)."
+    evidence: "p1: 'we express the actions as text tokens and incorporate them directly into the training set'"
+    verified: true
+
+  - id: q06
+    type: single
+    lang: id
+    question: "Diffusion Policy merepresentasikan visuomotor policy robot sebagai proses apa?"
+    gold:
+      - {doc: P8, pages: [1]}
+    answer: "Sebagai conditional denoising diffusion process pada action space robot."
+    evidence: "p1: 'representing a robot's visuomotor policy as a conditional denoising diffusion process'"
+    verified: true
+
+  - id: q07
+    type: detail
+    lang: en
+    question: "In MMMU-Pro, how many candidate options does each question have after augmentation, and how much did GPT-4o (0513) drop because of it?"
+    gold:
+      - {doc: P4, pages: [3, 5]}
+    answer: "From 4 to 10 options; GPT-4o (0513) dropped 10.7 points, from 64.7% to 54.0%."
+    evidence: "p5: 'The shift from 4 to 10 candidate options ... GPT-4o (0513) experienced a decrease of 10.7%, from 64.7% to 54.0%.'"
+    verified: true
+
+  - id: q08
+    type: detail
+    lang: id
+    question: "Kapan dan lewat apa GPT-4V diakses untuk evaluasi benchmark MMVP?"
+    gold:
+      - {doc: P1, pages: [12]}
+    answer: "Lewat ChatGPT, pada Oktober dan November 2023 (appendix B.1)."
+    evidence: "p12 (appendix B.1): 'We access GPT-4V through ChatGPT in October and November 2023.'"
+    verified: true
+
+  - id: q09
+    type: single
+    lang: id
+    question: "Apa dua kategori visual question di HallusionBench?"
+    gold:
+      - {doc: P5, pages: [2, 3]}
+    answer: "Visual Dependent dan Visual Supplement."
+    evidence: "p3: 'We define the two categories of visual questions: Visual Dependent and Visual Supplement.'"
+    verified: true
+
+  - id: q10
+    type: detail
+    lang: en
+    question: "How many robot embodiments and trajectories does the Open X-Embodiment dataset contain?"
+    gold:
+      - {doc: P9, pages: [3]}
+    answer: "1M+ real robot trajectories from 22 robot embodiments (pooled from 60 existing datasets)."
+    evidence: "p3: 'contains 1M+ real robot trajectories spanning 22 robot embodiments'"
+    verified: true
+
+  - id: q11
+    type: cross
+    lang: id
+    question: "Apa hubungan antara RT-2 dan RT-2-X?"
+    gold:
+      - {doc: P6, pages: [1, 3]}
+      - {doc: P9, pages: [4, 5]}
+    answer: "RT-2-X memakai pendekatan RT-2 (VLM yang mengeluarkan action sebagai text token, co-fine-tuning dengan data VLM) tetapi dilatih dengan data robot Open X-Embodiment yang lebih beragam."
+    evidence: "P9 p4: 'RT-2-X builds on a VLM backbone by representing actions as another language'; p5: 'co-fine-tuning (similarly to the original RT-2)'"
+    verified: true
+
+  - id: q12
+    type: cross
+    lang: en
+    question: "MMVP and HallusionBench both study failures of vision-language models. What kind of failure does each one focus on?"
+    gold:
+      - {doc: P1, pages: [1]}
+      - {doc: P5, pages: [1]}
+    answer: "MMVP: basic visual patterns the CLIP vision encoder fails to distinguish (CLIP-blind pairs). HallusionBench: language hallucination (relying on language priors) and visual illusion."
+    evidence: "P1 p1 abstract (MMVP, nine visual patterns); P5 p1: 'Language Hallucination ... conclusions drawn without visual input' and 'Visual Illusion'"
+    verified: true
+
+  - id: q13
+    type: none
+    lang: id
+    question: "Berapa learning rate yang dipakai untuk melatih GPT-4?"
+    gold: []
+    answer: "Tidak ada di koleksi."
+
+  - id: q14
+    type: none
+    lang: en
+    question: "What score does RT-2 achieve on the MMVP benchmark?"
+    gold: []
+    answer: "Not in the collection: P6 never mentions MMVP and P1 never mentions RT-2 (checked by text search)."
