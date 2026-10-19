@@ -65,15 +65,32 @@ references, which the labelling handles.
 
 ## 3. Architecture
 
+**Ingestion** (`python -m rag.cli ingest`, run once):
+
+```mermaid
+flowchart LR
+    A["10 PDFs"] --> B["PyMuPDFLoader<br/>1 Document / page"]
+    B --> C["Label page<br/>(papers.yaml)"]
+    C -->|"drop references"| D["Text splitter<br/>400 tok, overlap 80"]
+    D --> E[("Chroma<br/>bge-m3 vectors")]
+    D --> F[("chunks.jsonl<br/>for BM25")]
 ```
-PDF ─▶ PyMuPDFLoader (1 Document per page) ─▶ label page (papers.yaml) ─▶ drop references
-    ─▶ RecursiveCharacterTextSplitter (400 tokens, overlap 80, per page)
-    ─▶ HuggingFaceEmbeddings (bge-m3, normalised) ─▶ Chroma (cosine)       ┐
-    ─▶ chunks.jsonl ─▶ BM25Retriever (lowercase word tokens)               ├─ EnsembleRetriever
-question ──────────────────────────────────────────────────────────────────┘  (weighted RRF, c=60)
-    ─▶ top-5 chunks, numbered [C1]..[C5] ─▶ ChatPromptTemplate ─▶ ChatOllama (qwen3:8b)
-    ─▶ answer ─▶ map each [Cn] back to paper + page; flag numbers never given (invalid)
+
+**Query** (`python -m rag.cli ask "..."`, per question):
+
+```mermaid
+flowchart LR
+    Q(["Question"]) --> R1["Dense retriever<br/>(Chroma)"]
+    Q --> R2["BM25 retriever<br/>(chunks.jsonl)"]
+    R1 --> H["EnsembleRetriever<br/>weighted RRF, c=60"]
+    R2 --> H
+    H --> K["Top-5 chunks<br/>C1 … C5"]
+    K --> P["ChatPromptTemplate"]
+    P --> L["ChatOllama<br/>qwen3:8b"]
+    L --> O(["Answer + citations<br/>Cn → paper + page"])
 ```
+
+Each `[Cn]` in the answer is mapped back to the chunk given as passage *n*; numbers that were never given are flagged as invalid citations.
 
 | Stage | File | Key settings (`config.yaml`) |
 |---|---|---|
