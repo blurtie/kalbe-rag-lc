@@ -1,6 +1,7 @@
 # RAG over 10 Multimodal & Embodied AI Papers (LangChain)
 
 Technical assessment, Option 1 (RAG Implementation), AI Engineer – Multimodal Intern, Kalbe.
+
 Author: Muhammad Faiqi Harumantaka.
 
 A question-answering system over the 10 papers in the assessment reading list. It retrieves
